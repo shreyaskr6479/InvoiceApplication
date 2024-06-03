@@ -20,9 +20,10 @@ namespace InvoiceApplication.Container
         public async Task<IEnumerable<CategoryDto>> GetCategories()
         {
             var categories = await _context.Categories.ToListAsync();
+
             if (categories != null && categories.Count > 0)
-            { 
-                return this._mapper.Map<IEnumerable<Category>,IEnumerable<CategoryDto>>(categories);
+            {
+                return this._mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(categories);
             }
             return Enumerable.Empty<CategoryDto>();
         }

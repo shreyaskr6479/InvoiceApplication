@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var dbContext = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
@@ -28,7 +28,7 @@ builder.Services.AddTransient<IInvoiceItemContainer, InvoiceItemContainer>();
 // Configuring the auto mapper.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-var automapper = new MapperConfiguration(item=>item.AddProfile(new MappingProfile()));
+var automapper = new MapperConfiguration(item => item.AddProfile(new MappingProfile()));
 IMapper mapper = automapper.CreateMapper();
 builder.Services.AddSingleton(mapper);
 

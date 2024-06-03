@@ -16,11 +16,11 @@ namespace InvoiceApplication.Controllers
             _productContainer = productContainer;
         }
 
-        // GET: api/Product
+        // GET: api/Product/GetAllProducts
         [HttpGet("GetAllProducts")]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
-            try 
+            try
             {
                 var products = await _productContainer.GetProducts();
 

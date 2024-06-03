@@ -15,13 +15,14 @@ namespace InvoiceApplication.Controllers
             this._invoiceItemContainer = invoiceItemContainer;
         }
 
-        // POST: api/Invoice/5
-        [HttpPost("{customerId}/generate")]
+        // GET: api/Invoice/5/generate
+        [HttpGet("{customerId}/generate")]
         public async Task<ActionResult<InvoiceDto>> GenerateInvoice(int customerId, string paymentOption)
         {
             try
             {
                 var customer = await _invoiceItemContainer.GetCustomerByCustomerId(customerId);
+
                 if (customer == null)
                 {
                     return NotFound("Customer not found");
@@ -34,17 +35,16 @@ namespace InvoiceApplication.Controllers
                     return BadRequest("Cart is empty");
                 }
 
-                var invoice = await _invoiceItemContainer.GetInvoice(
-                    customer, invoiceItems, paymentOption);
+                var invoice = await _invoiceItemContainer.GetInvoice(customer, invoiceItems, paymentOption);
 
-                if (invoice == null) 
+                if (invoice == null)
                 {
                     BadRequest("Invoice not available");
                 }
-                    
+
                 return Ok(invoice);
             }
-            catch(Exception ex)
+            catch
             {
                 return BadRequest();
             }

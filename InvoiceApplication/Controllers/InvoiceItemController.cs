@@ -44,13 +44,14 @@ namespace InvoiceApplication.Controllers
             }
         }
 
-        // POST: api/InvoiceItem
+        // POST: api/InvoiceItem/5/add
         [HttpPost("{customerId}/add")]
-        public async Task<ActionResult<InvoiceItem>> AddItemToCart(int customerId, [FromBody]InvoiceItemDto invoiceItem)
+        public async Task<ActionResult<InvoiceItem>> AddItemToCart(int customerId, [FromBody] InvoiceItemDto invoiceItem)
         {
             try
             {
                 var customer = await _invoiceItemContainer.GetCustomerByCustomerId(customerId);
+
                 if (customer == null)
                 {
                     return NotFound("Customer not found");
@@ -64,10 +65,10 @@ namespace InvoiceApplication.Controllers
                 }
 
                 await _invoiceItemContainer.AddInvoiceItemToCart(invoiceItem, product);
+
                 return Ok(invoiceItem);
-                //return CreatedAtAction("GetInvoiceItem", new { id = invoiceItem.Id }, invoiceItem);
             }
-            catch(Exception ex)
+            catch
             {
                 return BadRequest();
             }
@@ -88,6 +89,7 @@ namespace InvoiceApplication.Controllers
                 var product = await _invoiceItemContainer.GetProductByProductId(item.ProductId);
 
                 await _invoiceItemContainer.DeleteInvoiceItemFromCart(item, product);
+
                 return NoContent();
             }
             catch

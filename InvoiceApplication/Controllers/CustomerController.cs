@@ -16,7 +16,7 @@ namespace InvoiceApplication.Controllers
             this._customerContainer = customerContainer;
         }
 
-        // GET: api/Customer
+        // GET: api/Customer/GetAllCustomers
         [HttpGet("GetAllCustomers")]
         public async Task<ActionResult<IEnumerable<CustomerDto>>> GetCustomers()
         {
@@ -91,7 +91,7 @@ namespace InvoiceApplication.Controllers
             catch
             {
                 return BadRequest();
-            }            
+            }
         }
 
         // DELETE: api/Customer/5

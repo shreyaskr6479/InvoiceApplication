@@ -27,10 +27,10 @@ namespace InvoiceApplication.Container
         {
             // Calculating the total price
             var itemTotalPrice = invoiceItem.Quantity * product.Price;
-            invoiceItem.TotalItemPrice = itemTotalPrice - ((invoiceItem.Discount/100) * itemTotalPrice);
-            
+            invoiceItem.TotalItemPrice = itemTotalPrice - ((invoiceItem.Discount / 100) * itemTotalPrice);
+
             _context.InvoiceItems.Add(this._mapper.Map<InvoiceItemDto, InvoiceItem>(invoiceItem));
-            
+
             // Update product quantity
             product.Quantity -= invoiceItem.Quantity;
 
@@ -73,12 +73,11 @@ namespace InvoiceApplication.Container
         }
 
         public async Task<InvoiceDto> GetInvoice(
-            Customer customer, List<InvoiceItem> invoiceItems, string paymentOption) 
+            Customer customer, List<InvoiceItem> invoiceItems, string paymentOption)
         {
             InvoiceDto invoice = new InvoiceDto
             {
-                CustomerId = customer.Id,
-                Customer =  customer,
+                Customer = customer,
                 PaymentOption = paymentOption
             };
 

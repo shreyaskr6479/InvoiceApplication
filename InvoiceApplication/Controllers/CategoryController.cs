@@ -9,14 +9,14 @@ namespace InvoiceApplication.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryContainer _categoryContainer;        
+        private readonly ICategoryContainer _categoryContainer;
 
         public CategoryController(ICategoryContainer categoryContainer)
         {
             this._categoryContainer = categoryContainer;
         }
 
-        // GET: api/Category
+        // GET: api/Category/GetAllCategories
         [HttpGet("GetAllCategories")]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
         {
